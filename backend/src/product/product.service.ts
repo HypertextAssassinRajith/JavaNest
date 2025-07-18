@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { S3Service } from '../s3/s3.service';
 
@@ -29,10 +29,20 @@ export class ProductService {
   }
 
   async findOne(id: number) {
+    const existingProduct = await this.prisma.product.findUnique({ where: { id } });
+    if (!existingProduct) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
     return this.prisma.product.findUnique({ where: { id } });
   }
 
   async update(id: number, data: any, file?: Express.Multer.File) {
+
+    const existingProduct = await this.prisma.product.findUnique({ where: { id } });
+    if (!existingProduct) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+  
     let imageUrl = data.imageUrl;
     if (file) {
       imageUrl = await this.s3Service.uploadFile(file);
@@ -51,6 +61,12 @@ export class ProductService {
   }
 
   async remove(id: number) {
+
+    const existingProduct = await this.prisma.product.findUnique({ where: { id } });
+    if (!existingProduct) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+
     return this.prisma.product.delete({ where: { id } });
   }
 }

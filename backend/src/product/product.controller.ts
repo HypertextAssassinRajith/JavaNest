@@ -10,6 +10,7 @@ import {
   UploadedFile,
   ParseFilePipe,
   FileTypeValidator,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -39,14 +40,14 @@ export class ProductController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number) {
+  async findOne(@Param('id',ParseIntPipe) id: number) {
     return this.productService.findOne(id);
   }
 
   @Patch(':id')
   @UseInterceptors(FileInterceptor('file'))
   async update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateProductData: any,
     @UploadedFile(
       new ParseFilePipe({
@@ -60,7 +61,7 @@ export class ProductController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
+  async remove(@Param('id',ParseIntPipe) id: number) {
     return this.productService.remove(id);
   }
 }
