@@ -5,9 +5,7 @@ import { useAuth } from '../store/auth';
 export default function AdminProductsPage() {
   const { user } = useAuth();
   const [products,setProducts] = useState([]);
-  const [form,setForm] = useState({
-    title:'', price:'', stock:'', description:''
-  });
+  const [form,setForm] = useState({ title:'', price:'', stock:'', description:'' });
   const [error,setError] = useState('');
   const [loading,setLoading] = useState(false);
 
@@ -19,10 +17,9 @@ export default function AdminProductsPage() {
       setError(e.message);
     }
   }
-
   useEffect(()=> { load(); }, []);
 
-  if (user?.role !== 'admin') return <p>Forbidden</p>;
+  if (user?.role !== 'admin') return <div className="alert alert-error mt-6 max-w-lg mx-auto">Forbidden</div>;
 
   async function createProduct() {
     setError('');
@@ -54,64 +51,87 @@ export default function AdminProductsPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-xl font-bold mb-4">Admin Products</h1>
-      <div className="mb-6 bg-white p-4 rounded shadow max-w-lg">
-        <h2 className="font-semibold mb-2">Create Product</h2>
-        {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
-        <div className="grid gap-2">
-          <input
-            className="border p-2 rounded"
-            placeholder="Title"
-            value={form.title}
-            onChange={e=>setForm(f=>({...f,title:e.target.value}))}
-          />
-          <input
-            className="border p-2 rounded"
-            placeholder="Price"
-            value={form.price}
-            onChange={e=>setForm(f=>({...f,price:e.target.value}))}
-          />
-          <input
-            className="border p-2 rounded"
-            placeholder="Stock"
-            value={form.stock}
-            onChange={e=>setForm(f=>({...f,stock:e.target.value}))}
-          />
-          <textarea
-            className="border p-2 rounded"
-            placeholder="Description"
-            value={form.description}
-            onChange={e=>setForm(f=>({...f,description:e.target.value}))}
-          />
-          <button
-            disabled={loading}
-            onClick={createProduct}
-            className="bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white py-2 rounded"
-          >
-            {loading ? 'Saving...' : 'Save'}
-          </button>
+    <div className="pt-6">
+      <h1 className="text-3xl font-bold mb-6">Admin Products</h1>
+
+      <div className="grid md:grid-cols-2 gap-10">
+        <div className="card bg-base-100 shadow">
+          <div className="card-body">
+            <h2 className="card-title">Create Product</h2>
+            {error && <div className="alert alert-error py-2 text-sm">
+              <span>{error}</span>
+            </div>}
+            <input
+              className="input input-bordered w-full"
+              placeholder="Title"
+              value={form.title}
+              onChange={e=>setForm(f=>({...f,title:e.target.value}))}
+            />
+            <div className="flex gap-3">
+              <input
+                className="input input-bordered w-1/2"
+                placeholder="Price"
+                value={form.price}
+                onChange={e=>setForm(f=>({...f,price:e.target.value}))}
+              />
+              <input
+                className="input input-bordered w-1/2"
+                placeholder="Stock"
+                value={form.stock}
+                onChange={e=>setForm(f=>({...f,stock:e.target.value}))}
+              />
+            </div>
+            <textarea
+              className="textarea textarea-bordered w-full"
+              placeholder="Description"
+              value={form.description}
+              onChange={e=>setForm(f=>({...f,description:e.target.value}))}
+            />
+            <button
+              disabled={loading}
+              onClick={createProduct}
+              className={`btn btn-primary ${loading ? 'loading' : ''}`}
+            >
+              {loading ? 'Saving...' : 'Save'}
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div className="overflow-x-auto">
+            <table className="table table-zebra">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {products.map(p => (
+                <tr key={p._id}>
+                  <td>{p.title}</td>
+                  <td>${p.price}</td>
+                  <td>{p.stock}</td>
+                  <td>
+                    <button
+                      onClick={() => deleteProduct(p._id)}
+                      className="btn btn-xs btn-error"
+                    >
+                      Del
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {!products.length && (
+                <tr><td colSpan="4" className="text-center opacity-70">No products</td></tr>
+              )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <ul className="space-y-2">
-        {products.map(p => (
-          <li key={p._id} className="flex justify-between items-center bg-white p-3 rounded shadow">
-            <div>
-              <div className="font-semibold">{p.title}</div>
-              <div className="text-xs text-gray-600">
-                ${p.price} | Stock: {p.stock}
-              </div>
-            </div>
-            <button
-              onClick={() => deleteProduct(p._id)}
-              className="text-red-600 text-sm"
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-        {!products.length && <p>No products yet.</p>}
-      </ul>
     </div>
   );
 }

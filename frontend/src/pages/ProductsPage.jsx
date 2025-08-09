@@ -17,36 +17,41 @@ export default function ProductsPage() {
       .finally(()=>setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading products...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
+  if (loading) return <div className="flex justify-center py-10"><span className="loading loading-spinner loading-lg text-primary"></span></div>;
+  if (error) return <div className="alert alert-error max-w-md mx-auto mt-6">
+    <span>{error}</span>
+  </div>;
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Products</h1>
-      <div className="grid md:grid-cols-3 gap-4">
+    <div className="pt-6">
+      <div className="flex items-center justify-between mb-5">
+        <h1 className="text-3xl font-bold">Products</h1>
+        <div className="text-sm opacity-70">{products.length} items</div>
+      </div>
+      {products.length === 0 && <p>No products yet.</p>}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map(p => (
-          <div key={p._id} className="border rounded p-4 bg-white shadow-sm">
-            <h2 className="font-semibold">{p.title}</h2>
-            <p className="text-sm text-gray-600">${p.price?.toFixed(2)}</p>
-            <div className="mt-3 flex gap-2">
-              <Link
-                to={`/products/${p._id}`}
-                className="text-blue-600 hover:underline text-sm"
-              >
-                View
-              </Link>
-              <button
-                onClick={() =>
-                  add({ productId: p._id, title: p.title, price: p.price })
-                }
-                className="bg-amber-700 text-white text-sm px-3 py-1 rounded hover:bg-amber-600"
-              >
-                Add
-              </button>
+          <div key={p._id} className="card bg-base-100 shadow hover:shadow-lg transition">
+            <div className="card-body">
+              <h2 className="card-title">
+                {p.title}
+                <div className="badge badge-secondary">${p.price?.toFixed(2)}</div>
+              </h2>
+              <p className="line-clamp-2 text-sm opacity-70">{p.description || 'No description'}</p>
+              <div className="card-actions justify-end mt-4">
+                <Link to={`/products/${p._id}`} className="btn btn-outline btn-primary btn-sm">
+                  Details
+                </Link>
+                <button
+                  onClick={() => add({ productId: p._id, title: p.title, price: p.price })}
+                  className="btn btn-primary btn-sm"
+                >
+                  Add
+                </button>
+              </div>
             </div>
           </div>
         ))}
-        {!products.length && <p>No products available</p>}
       </div>
     </div>
   );

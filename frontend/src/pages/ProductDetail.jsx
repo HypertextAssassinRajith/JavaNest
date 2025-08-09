@@ -18,23 +18,29 @@ export default function ProductDetail() {
       .finally(()=>setLoading(false));
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
-  if (!product) return <p>Product not found.</p>;
+  if (loading) return <div className="flex justify-center py-10"><span className="loading loading-bars loading-lg text-primary"></span></div>;
+  if (error) return <div className="alert alert-error max-w-md mx-auto mt-6">
+    <span>{error}</span>
+  </div>;
+  if (!product) return <p className="mt-6 text-center">Product not found.</p>;
 
   return (
-    <div className="max-w-lg bg-white p-6 rounded shadow">
-      <h1 className="text-2xl font-bold">{product.title}</h1>
-      <p className="mt-2 text-lg font-semibold">${product.price}</p>
-      <p className="mt-2 text-sm text-gray-700 whitespace-pre-line">
-        {product.description || 'No description'}
-      </p>
-      <button
-        onClick={() => add({ productId: product._id, title: product.title, price: product.price })}
-        className="mt-5 bg-amber-700 hover:bg-amber-600 text-white px-4 py-2 rounded"
-      >
-        Add to Cart
-      </button>
+    <div className="max-w-2xl mx-auto pt-8">
+      <div className="card bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h1 className="card-title text-4xl">{product.title}</h1>
+          <div className="text-2xl font-semibold mt-2">${product.price}</div>
+          <p className="mt-4 leading-relaxed whitespace-pre-line">{product.description || 'No description'}</p>
+          <div className="card-actions justify-end mt-6">
+            <button
+              onClick={() => add({ productId: product._id, title: product.title, price: product.price })}
+              className="btn btn-primary"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
