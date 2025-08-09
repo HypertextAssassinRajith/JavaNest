@@ -11,5 +11,8 @@
     "install:all": "npm install --workspaces",
     "build:frontend": "npm run build --workspace frontend",
     "build:backend": "npm run build --workspace backend"
+  },
+  "dependencies": {
+    "workspaces": "^0.1.0"
   }
 }
