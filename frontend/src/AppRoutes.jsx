@@ -6,6 +6,10 @@ import CheckoutPage from './pages/CheckoutPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import LoginPage from './pages/LoginPage';
 import AdminProductsPage from './pages/AdminProductsPage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import ContactPage from './pages/ContactPage';
+import BookTablePage from './pages/BookTablePage';
 
 export default function AppRoutes() {
   return (
@@ -17,7 +21,11 @@ export default function AppRoutes() {
       <Route path="/payment-success" element={<PaymentSuccessPage/>} />
       <Route path="/login" element={<LoginPage/>} />
       <Route path="/admin/products" element={<AdminProductsPage/>} />
-      <Route path="*" element={<p>Not Found</p>} />
+      <Route path="/about" element={<AboutPage/>} />
+      <Route path="/services" element={<ServicesPage/>} />
+      <Route path="/contact" element={<ContactPage/>} />
+      <Route path="/book-table" element={<BookTablePage/>} />
+      <Route path="*" element={<p className="pt-28 text-center">Not Found</p>} />
     </Routes>
   );
 }
