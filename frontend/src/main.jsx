@@ -7,7 +7,7 @@ import AppRoutes from './AppRoutes';
 import { useAuth } from './store/auth';
 import { api } from './api/client';
 
-// (Optional) Try to fetch /auth/me on load to populate user if token exists
+// populate user if token exists
 function Bootstrap() {
   const { token, setAuth } = useAuth();
   React.useEffect(() => {
@@ -15,10 +15,9 @@ function Bootstrap() {
       api.get('/auth/me')
         .then(r => {
           // r.data.user has id + role
-          // Extend minimal shape:
           setAuth({ id: r.data.user.id, role: r.data.user.role, email: '(session)' }, token);
         })
-        .catch(()=>{ /* token invalid, ignore */ });
+        .catch(()=>{  });
     }
   }, [token, setAuth]);
   return null;
