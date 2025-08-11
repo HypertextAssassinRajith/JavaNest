@@ -3,6 +3,7 @@ services:
     name: javanest-backend
     rootDir: backend
     runtime: node
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     autoDeploy: true
