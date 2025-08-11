@@ -44,7 +44,7 @@ export default function ProductsPage() {
               <div key={p._id} className="card bg-base-100 shadow-lg group hover:shadow-primary/30 transition">
                 <figure className="h-44 bg-gradient-to-br from-neutral/20 to-neutral/5 w-full flex items-center justify-center relative overflow-hidden">
                   <span className="text-6xl opacity-10 group-hover:opacity-20 transition select-none">
-                    ☕
+                    <img src={p.images[0]} alt={p.title} />
                   </span>
                 </figure>
                 <div className="card-body">

@@ -21,7 +21,7 @@ async function bootstrap() {
     const corsOptions = {
       origin: [
         'http://localhost:5173', // dev
-        env.FRONTEND_ORIGIN || 'https://javanest-frontend.onrender.com' // prod
+        env.FRONTEND_ORIGIN // prod
       ],
       credentials: true
     };
