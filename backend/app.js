@@ -7,8 +7,8 @@ const rateLimit = require('express-rate-limit');
 
 const { env } = require('./config/env');
 const authRoutes = require('./routes/auth');
-const productRoutes = require('./routes/products');
-const orderRoutes = require('./routes/orders');
+const productRoutes = require('./routes/Products');
+const orderRoutes = require('./routes/Orders');
 
 async function bootstrap() {
   try {
