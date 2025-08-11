@@ -13,7 +13,7 @@ services:
         generateValue: true
       - key: FRONTEND_ORIGIN
         value: https://javanest-frontend.onrender.com
-  - type: web
+  - type: static
     name: javanest-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
