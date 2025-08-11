@@ -14,3 +14,15 @@ services:
         generateValue: true
       - key: FRONTEND_ORIGIN
         value: https://javanest-frontend.onrender.com
+  - type: web
+    name: JavaNestFrontend
+    runtime: static
+    repo: https://github.com/HypertextAssassinRajith/JavaNest
+    branch: vite-express
+    envVars:
+    - key: VITE_API_URL
+      sync: false
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeployTrigger: commit
+    rootDir: frontend
