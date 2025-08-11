@@ -16,9 +16,16 @@ async function bootstrap() {
     console.log('Mongo connected');
 
     const app = express();
-    app.use(cors())
-
-    app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+    
+    // CORS for production
+    const corsOptions = {
+      origin: [
+        'http://localhost:5173', // dev
+        env.FRONTEND_ORIGIN || 'https://javanest-frontend.onrender.com' // prod
+      ],
+      credentials: true
+    };
+    app.use(cors(corsOptions));
     app.use(helmet());
     app.use(express.json());
     app.use(morgan('dev'));
