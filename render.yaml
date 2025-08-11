@@ -2,7 +2,7 @@ services:
   - type: web
     name: javanest-backend
     rootDir: backend
-    env: node
+    runtime: node
     buildCommand: npm install
     startCommand: npm start
     autoDeploy: true
@@ -13,7 +13,7 @@ services:
         generateValue: true
       - key: FRONTEND_ORIGIN
         value: https://javanest-frontend.onrender.com
-  - type: static
+  - type: web
     name: javanest-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
