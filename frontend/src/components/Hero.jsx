@@ -1,9 +1,9 @@
 export default function Hero() {
   return (
     <section className="relative pt-16"> 
-      <div className="relative flex flex-col lg:flex-row min-h-[80vh]">
+      <div className="relative flex flex-col lg:flex-row h-screen">
         {/* Left Beans */}
-        <div className="relative w-full lg:w-7/12">
+        <div className="relative w-full lg:w-3/5">
           <img
             src="/images/coffee-beans.jpg"
             alt="Coffee beans"
@@ -11,7 +11,7 @@ export default function Hero() {
             loading="lazy"
           />
           <div className="absolute inset-0 bg-neutral-900/60 backdrop-blur-[1px]" />
-          <div className="relative z-10 max-w-xl px-6 md:px-12 lg:px-16 py-20 text-neutral-content">
+          <div className="relative z-10 max-w-xl px-6 md:px-12 lg:px-16 py-20 text-neutral-content flex flex-col justify-center h-full">
             <p className="text-xs tracking-[0.25em] uppercase mb-4 opacity-80">
               Welcome to JavaNest
             </p>
@@ -33,11 +33,11 @@ export default function Hero() {
           </div>
         </div>
         {/* Right Cup */}
-        <div className="hidden lg:flex w-5/12 bg-neutral-900 items-center justify-center relative overflow-hidden">
+        <div className="hidden lg:flex w-2/5 bg-neutral-900 items-center justify-center relative overflow-hidden">
           <img
             src="/images/coffee-cup.png"
             alt="Coffee Cup"
-            className="w-80 max-w-[70%] drop-shadow-2xl animate-fadein-slow"
+            className="w-98 max-w-[100%] drop-shadow-2xl animate-fadein-slow"
             loading="lazy"
           />
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 blur-3xl rounded-full pointer-events-none" />
