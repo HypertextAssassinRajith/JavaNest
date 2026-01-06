@@ -14,15 +14,36 @@ export default function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<{ orderId: string } | null>(null);
 
+  const [form, setForm] = useState({
+    name: "",
+    contact: "",
+    address: "",
+    note: "",
+  });
+
   const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
 
   const payload = useMemo(
-    () => ({ items: items.map((i) => ({ productId: i.id, qty: i.qty })) }),
-    [items]
+    () => ({
+      items: items.map((i) => ({ productId: i.id, qty: i.qty })),
+      customer: {
+        name: form.name,
+        contact: form.contact,
+        address: form.address,
+        note: form.note,
+      },
+    }),
+    [items, form]
   );
 
   async function placeOrder() {
     setError(null);
+
+    if (!form.name.trim() || !form.contact.trim() || !form.address.trim()) {
+      setError("Please fill Name, Contact and Address.");
+      return;
+    }
+
     setLoading(true);
     try {
       // NOTE: your backend currently requires auth (JWT) for /orders.
@@ -90,11 +111,55 @@ export default function CheckoutPage() {
       <div className="max-w-xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">Checkout</h1>
         <p className="text-white/70">
-          This uses your existing backend order flow. You must be logged in (token in localStorage).
+          Please review your order and enter delivery details below to complete checkout.
         </p>
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-6">
-          <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold mb-4">Delivery Details</h2>
+
+          <div className="grid gap-4">
+            <div>
+              <label className="block text-sm text-white/80 mb-1">Name *</label>
+              <input
+                value={form.name}
+                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                className="w-full rounded-lg bg-transparent border border-white/20 px-4 py-3 text-white outline-none focus:border-white/50"
+                placeholder="Your name"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm text-white/80 mb-1">Contact (Phone) *</label>
+              <input
+                value={form.contact}
+                onChange={(e) => setForm((f) => ({ ...f, contact: e.target.value }))}
+                className="w-full rounded-lg bg-transparent border border-white/20 px-4 py-3 text-white outline-none focus:border-white/50"
+                placeholder="07X XXX XXXX"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm text-white/80 mb-1">Address *</label>
+              <textarea
+                value={form.address}
+                onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
+                className="w-full rounded-lg bg-transparent border border-white/20 px-4 py-3 text-white outline-none focus:border-white/50 min-h-[96px]"
+                placeholder="House No, Street, City"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm text-white/80 mb-1">Special Note</label>
+              <textarea
+                value={form.note}
+                onChange={(e) => setForm((f) => ({ ...f, note: e.target.value }))}
+                className="w-full rounded-lg bg-transparent border border-white/20 px-4 py-3 text-white outline-none focus:border-white/50 min-h-[80px]"
+                placeholder="e.g., no sugar, call when arrived"
+              />
+            </div>
+          </div>
+
+          <div className="mt-6 flex items-center justify-between">
             <span className="text-white/80">Total</span>
             <span className="text-2xl font-bold">Rs {total.toFixed(2)}</span>
           </div>
