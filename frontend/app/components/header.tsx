@@ -88,7 +88,7 @@ export function Header() {
                 </a>
               </li>
             ))}
-            <li>
+            {/* <li>
               <a
                 href="/book-table"
                 className="block w-full hover:text-gray-500"
@@ -96,7 +96,7 @@ export function Header() {
               >
                 Book Table
               </a>
-            </li>
+            </li> */}
             <li>
               <a
                 href="/cart"

@@ -25,7 +25,7 @@ export class ProductController {
     @Body() createProductData: any,
     @UploadedFile(
       new ParseFilePipe({
-        validators: [new FileTypeValidator({ fileType: 'image/*' })],
+        // validators: [new FileTypeValidator({ fileType: 'image/png' })],
       }),
     )
     file?: Express.Multer.File,

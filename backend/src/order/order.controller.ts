@@ -5,6 +5,16 @@ import { OrdersService } from './order.service';
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
+
+  @Post()
+  async createOrder(
+    @Body('items') items: Array<{ productId: number; qty: number }>,
+    @Body('customer') customer: { name: string; contact: string; address: string; note?: string },
+    @Body('userId') userId?: number,
+  ) {
+    return this.ordersService.createFromFrontend({ items, customer, userId });
+  }
+
   @Post('checkout/:userId')
   async checkout(@Param('userId', ParseIntPipe) userId: number, @Body('cartItems') cartItems: any[]) {
     return this.ordersService.checkout(userId, cartItems);
