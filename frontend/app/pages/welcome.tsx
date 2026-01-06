@@ -7,7 +7,7 @@ import Link from 'next/link'
 export  function Welcome() {
     return (
         <section
-            className="relative flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat px-6 lg:px-20"
+            className="relative flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat px-6 lg:px-20 bg-[#0A0A0A]"
             style={{ backgroundImage: `url(${Background.src})` }}
         >
             <motion.div
