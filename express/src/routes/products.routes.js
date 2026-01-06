@@ -1,19 +1,20 @@
 import { Router } from "express";
-import { products, getProductById } from "../data/products.js";
+import { prisma } from "../db/prisma.js";
 
 const router = Router();
 
 // GET /api/products
-router.get("/", (_req, res) => {
+router.get("/", async (_req, res) => {
+  const products = await prisma.product.findMany({ orderBy: { id: "asc" } });
   res.json(products);
 });
 
 // GET /api/products/:id
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   const id = Number(req.params.id);
   if (!Number.isFinite(id)) return res.status(400).json({ message: "Invalid id" });
 
-  const product = getProductById(id);
+  const product = await prisma.product.findUnique({ where: { id } });
   if (!product) return res.status(404).json({ message: "Product not found" });
 
   res.json(product);
