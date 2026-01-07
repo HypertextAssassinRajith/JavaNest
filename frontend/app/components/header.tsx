@@ -19,7 +19,7 @@ export function Header() {
   if (!mounted) return null;
 
   const navItems = [
-    { href: "/home", label: "Home" },
+    { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
     { href: "/contact", label: "Contact" },
