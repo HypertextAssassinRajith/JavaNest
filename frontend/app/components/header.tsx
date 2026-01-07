@@ -19,10 +19,10 @@ export function Header() {
   if (!mounted) return null;
 
   const navItems = [
-    { href: "#Home", label: "Home" },
-    { href: "#About", label: "About" },
-    { href: "#Services", label: "Services" },
-    { href: "#Contact", label: "Contact" },
+    { href: "/home", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/contact", label: "Contact" },
     { href: "/product", label: "Shop" },
   ];
 
