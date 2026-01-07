@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { CoffeeCard } from "@/app/components/coffeeCard";
 import { useCartStore } from "@/app/lib/cartStore";
-import { Header } from "../components/header";
 import { toast } from "react-toastify";
 
 type Product = {
