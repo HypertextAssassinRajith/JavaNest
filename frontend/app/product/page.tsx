@@ -90,7 +90,6 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
-      <Header />
       <section className="flex flex-col text-white text-center justify-center py-12 px-6 rounded-lg">
         <h1 className="text-4xl font-bold">Shop</h1>
         <div className="w-12 h-1 bg-white mx-auto mt-2" />
