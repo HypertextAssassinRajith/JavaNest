@@ -43,12 +43,7 @@ export function Header() {
         </ul>
       </nav>
       <div className="flex items-center gap-2">
-        <a
-          href="/book-table"
-          className="hidden md:inline-block rounded-lg border cursor-pointer border-white px-6 py-3 text-lg font-semibold text-white shadow-md transition duration-300 hover:bg-white hover:text-black"
-        >
-          Book Table
-        </a>
+
 
         <a
           href="/cart"
