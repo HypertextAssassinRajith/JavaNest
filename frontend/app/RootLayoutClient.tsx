@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import { Loader } from "@/app/components/loader";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
@@ -15,5 +18,20 @@ export default function RootLayoutClient({ children }: { children: React.ReactNo
     return <Loader />;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </>
+  );
 }

@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['javanest.fly.storage.tigris.dev']
+    domains: ['res.cloudinary.com']
   },
 };
 
