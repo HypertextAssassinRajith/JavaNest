@@ -2,7 +2,7 @@
 
 import { Header } from "@/app/components/header";
 import { Welcome } from "@/app/pages/welcome";
-import { About } from "@/app/pages/about";
+import  About  from "@/app/about/page";
 import ProductPage from "./product/page";
 
 

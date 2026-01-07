@@ -2,7 +2,7 @@ import React from "react";
 import CoffeeSplash from "@/app/assets/coffee-splash.png";
 import Image from "next/image";
 
-export function About() {
+export default function About() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-6 mt-10 lg:mt-0 bg-[#0A0A0A]">
       <div className="text-center mb-10">

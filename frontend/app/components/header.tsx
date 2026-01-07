@@ -21,7 +21,6 @@ export function Header() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
     { href: "/contact", label: "Contact" },
     { href: "/product", label: "Shop" },
   ];
@@ -32,7 +31,7 @@ export function Header() {
         <Image src={Logo} className="w-24" alt="header logo" />
       </a>
       <nav className="hidden md:block">
-        <ul className="flex space-x-6 text-sm font-medium">
+        <ul className="flex space-x-6 text-md font-bold">
           {navItems.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="text-white hover:text-gray-500">
@@ -83,15 +82,6 @@ export function Header() {
                 </a>
               </li>
             ))}
-            {/* <li>
-              <a
-                href="/book-table"
-                className="block w-full hover:text-gray-500"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Book Table
-              </a>
-            </li> */}
             <li>
               <a
                 href="/cart"
