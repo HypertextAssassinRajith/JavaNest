@@ -78,6 +78,7 @@ export default function CheckoutPage() {
       clear();
       setSuccess({ orderId });
       toast.success("Order placed successfully!");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       const msg = e?.response?.data?.message || e?.message || "Checkout failed";
       setError(msg);

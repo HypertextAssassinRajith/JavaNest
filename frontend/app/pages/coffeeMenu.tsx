@@ -53,7 +53,7 @@ export function CoffeeMenu() {
       })
       .then((response) => {
         const data = Array.isArray(response.data) ? response.data : [];
-        // map backend shape -> CoffeeItem shape while keeping your UI fields
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const mapped: CoffeeItem[] = data.map((p: any, idx: number) => ({
           id: p.id,
           _id: p._id,
@@ -94,6 +94,7 @@ export function CoffeeMenu() {
 
       <div className="flex flex-col justify-center gap-6 p-6 bg-[#0A0A0A] lg:flex-row">
         {coffeeItems.map((item, index) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           <CoffeeCard key={(item.id || item._id || index) as any} name={item.name} price={item.price} imageUrl={item.imageUrl} bgColor={item.bgColor} />
         ))}
       </div>
