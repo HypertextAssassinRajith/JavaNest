@@ -30,7 +30,7 @@ export function Header() {
       <a href="#" className="text-lg font-semibold">
         <Image src={Logo} className="w-24" alt="header logo" />
       </a>
-      <nav className="hidden md:block">
+      {/* <nav className="hidden md:block">
         <ul className="flex space-x-6 text-md font-bold">
           {navItems.map((item) => (
             <li key={item.href}>
@@ -40,7 +40,7 @@ export function Header() {
             </li>
           ))}
         </ul>
-      </nav>
+      </nav> */}
       <div className="flex items-center gap-2">
 
 
