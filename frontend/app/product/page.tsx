@@ -5,6 +5,7 @@ import axios from "axios";
 import { CoffeeCard } from "@/app/components/coffeeCard";
 import { useCartStore } from "@/app/lib/cartStore";
 import { Header } from "../components/header";
+import { toast } from "react-toastify";
 
 type Product = {
   id?: string;
@@ -118,7 +119,7 @@ export default function ProductPage() {
               imageUrl={imageUrl}
               bgColor={bgColor}
               actionLabel="Add to Cart"
-              onAction={(qty) =>
+              onAction={(qty) => {
                 addItem(
                   {
                     id,
@@ -127,8 +128,10 @@ export default function ProductPage() {
                     imageUrl,
                   },
                   qty
-                )
-              }
+                );
+
+                toast.success(`${name} added to cart${qty > 1 ? ` (x${qty})` : ""}`);
+              }}
             />
           );
         })}

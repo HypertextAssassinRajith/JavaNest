@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useCartStore } from "@/app/lib/cartStore";
+import { toast } from "react-toastify";
 
 export default function CheckoutPage() {
   const items = useCartStore((s) => s.items);
@@ -40,12 +41,16 @@ export default function CheckoutPage() {
     setError(null);
 
     if (!form.name.trim() || !form.contact.trim() || !form.address.trim()) {
-      setError("Please fill Name, Contact and Address.");
+      const msg = "Please fill Name, Contact and Address.";
+      setError(msg);
+      toast.error(msg);
       return;
     }
 
     if (payload.items.some((it) => !Number.isFinite(it.productId))) {
-      setError("Cart contains invalid product. Please clear cart and add items again.");
+      const msg = "Cart contains invalid product. Please clear cart and add items again.";
+      setError(msg);
+      toast.error(msg);
       return;
     }
 
@@ -72,8 +77,11 @@ export default function CheckoutPage() {
 
       clear();
       setSuccess({ orderId });
+      toast.success("Order placed successfully!");
     } catch (e: any) {
-      setError(e?.response?.data?.message || e?.message || "Checkout failed");
+      const msg = e?.response?.data?.message || e?.message || "Checkout failed";
+      setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -84,7 +92,7 @@ export default function CheckoutPage() {
       <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center gap-4 px-6">
         <h1 className="text-3xl font-bold">No items in cart</h1>
         <Link
-          href="/product"
+          href="/#product"
           className="rounded-lg border cursor-pointer border-white px-6 py-3 text-lg font-semibold text-white shadow-md transition duration-300 hover:bg-white hover:text-black"
         >
           Go to Shop
