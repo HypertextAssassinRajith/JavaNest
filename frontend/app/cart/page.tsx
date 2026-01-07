@@ -16,7 +16,7 @@ export default function CartPage() {
       <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center gap-4 px-6">
         <h1 className="text-3xl font-bold">Your cart is empty</h1>
         <Link
-          href="/product"
+          href="/#products"
           className="rounded-lg border cursor-pointer border-white px-6 py-3 text-lg font-semibold text-white shadow-md transition duration-300 hover:bg-white hover:text-black"
         >
           Go to Shop
