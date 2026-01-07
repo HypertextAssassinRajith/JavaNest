@@ -21,11 +21,11 @@ export default function CheckoutPage() {
     note: "",
   });
 
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 
   const payload = useMemo(
     () => ({
-      items: items.map((i) => ({ productId: i.id, qty: i.qty })),
+      items: items.map((i) => ({ productId: Number(i.id), qty: i.qty })),
       customer: {
         name: form.name,
         contact: form.contact,
@@ -44,10 +44,13 @@ export default function CheckoutPage() {
       return;
     }
 
+    if (payload.items.some((it) => !Number.isFinite(it.productId))) {
+      setError("Cart contains invalid product. Please clear cart and add items again.");
+      return;
+    }
+
     setLoading(true);
     try {
-      // NOTE: your backend currently requires auth (JWT) for /orders.
-      // If you want guest checkout, backend must be updated.
       const res = await axios.post(`${apiBase}/orders`, payload, {
         headers: {
           Accept: "application/json",
@@ -55,9 +58,9 @@ export default function CheckoutPage() {
         },
       });
 
-      const orderId = res.data?.order?._id || res.data?.order?.id || "";
+      const orderId = res.data?.order?._id || res.data?.order?.id || res.data?.id || "";
 
-      // Simulated payment endpoint (also auth protected)
+      // Simulated payment
       if (orderId) {
         await axios.post(`${apiBase}/orders/${orderId}/pay`, null, {
           headers: {

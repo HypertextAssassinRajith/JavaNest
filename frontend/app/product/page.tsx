@@ -28,7 +28,7 @@ export default function ProductPage() {
 
   const addItem = useCartStore((s) => s.addItem);
 
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 
   const palette = useMemo(
     () => ["bg-[#9C6B44]", "bg-[#6F7D5F]", "bg-[#2D241F]", "bg-[#8B5A2B]"],
