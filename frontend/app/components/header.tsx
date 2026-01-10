@@ -30,17 +30,6 @@ export function Header() {
       <a href="#" className="text-lg font-semibold">
         <Image src={Logo} className="w-24" alt="header logo" />
       </a>
-      {/* <nav className="hidden md:block">
-        <ul className="flex space-x-6 text-md font-bold">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a href={item.href} className="text-white hover:text-gray-500">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav> */}
       <div className="flex items-center gap-2">
 
 
